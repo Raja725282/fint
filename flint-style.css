@@ -1,0 +1,182 @@
+/* Flint Brand Colors - Updated Palette */
+:root {
+    --flint-primary: #4D0032;        /* Primary: Burgundy */
+    --flint-coral: #FFAF9C;          /* Accent 1: Coral Tint */
+    --flint-cornflower: #CED7FF;     /* Accent 2: Cornflower Tint */
+    --flint-mustard: #F0E2A6;        /* Accent 3: Mustard Tint */
+    --flint-mint: #D8FADD;           /* Accent 4: Mint Tint */
+    --flint-white: #FFFFFF;          /* Background: White */
+    --flint-gray: #757575;           /* Text secondary */
+    
+    /* RGB versions for opacity control */
+    --flint-primary-rgb: 77, 0, 50;
+    --flint-coral-rgb: 255, 175, 156;
+    --flint-cornflower-rgb: 206, 215, 255;
+    --flint-mustard-rgb: 240, 226, 166;
+    --flint-mint-rgb: 216, 250, 221;
+}
+
+/* Typography - Armand Grotesk */
+@font-face {
+    font-family: 'Armand Grotesk';
+    src: url('fonts/ArmandGrotesk-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Armand Grotesk';
+    src: url('fonts/ArmandGrotesk-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Typography Rules */
+body {
+    font-family: 'Armand Grotesk', sans-serif;
+    font-weight: 400;
+    letter-spacing: normal;
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Armand Grotesk', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Armand Grotesk', sans-serif;
+    color: var(--flint-primary);
+    letter-spacing: normal;
+    line-height: 1.5;
+    background-color: var(--flint-white);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Armand Grotesk', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+/* Cards */
+.card {
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: var(--flint-white);
+    transition: transform 0.2s ease;
+    border: 1px solid rgba(77, 0, 50, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+/* Buttons */
+.btn--primary {
+    background: var(--flint-primary);
+    color: var(--flint-white);
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-family: 'Armand Grotesk', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.btn--primary:hover {
+    background: rgba(var(--flint-primary-rgb), 0.8);
+    transform: translateY(-1px);
+}
+
+/* Progress Elements */
+.progress-circle {
+    width: 40px;
+    height: 40px;
+    background: var(--flint-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--flint-white);
+    border: 2px solid var(--flint-white);
+}
+
+.progress-circle::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 50%;
+    background: conic-gradient(var(--flint-primary) 0deg, transparent 0deg);
+    transition: all var(--duration-normal) var(--ease-standard);
+}
+
+/* Step Indicators */
+.step-circle {
+    background: var(--flint-primary);
+    color: var(--flint-white);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--flint-white);
+}
+
+/* Hero Section */
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--flint-primary);
+    margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--flint-coral);
+    margin-bottom: 2rem;
+}
+
+/* Floral Icons */
+.floral-icon {
+    width: 20px;
+    height: 20px;
+    fill: var(--flint-primary);
+}
+
+.header-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    border: 2px solid var(--flint-primary);
+    padding: 2px;
+    filter: brightness(0) saturate(100%) invert(8%) sepia(100%) saturate(7500%) hue-rotate(315deg) brightness(95%) contrast(110%);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.25rem;
+    }
+    
+    .step-circle {
+        width: 28px;
+        height: 28px;
+    }
+}

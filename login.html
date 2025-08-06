@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flint Directors Portal - Sign In</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="flint-style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="container-fluid h-100">
+            <div class="row h-100">
+                <!-- Left Side - Login Form -->
+                <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                    <div class="login-form-container">
+                        <div class="text-center mb-4">
+                            <img src="image/icon.PNG" alt="Flint Logo" class="login-logo mb-3">
+                            <h1 class="login-title">Flint</h1>
+                        </div>
+                        
+                        <div class="welcome-section text-center mb-4">
+                            <h2 class="welcome-title">Welcome Back</h2>
+                            <p class="welcome-subtitle">Sign in to your Directors Portal</p>
+                        </div>
+
+                        <form class="login-form" onsubmit="handleLogin(event)">
+                            <div class="form-group mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" placeholder="john@flint.com" required>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <div class="password-input-container">
+                                    <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                                    <button type="button" class="password-toggle" onclick="togglePassword()">
+                                        <i class="fas fa-eye" id="passwordToggleIcon"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <a href="#" class="forgot-password-link">Forgot password?</a>
+                            </div>
+
+                            <button type="submit" class="btn btn--primary btn--full-width mb-3">
+                                Sign In
+                            </button>
+
+                            <div class="text-center">
+                                <p class="signup-text">Don't have an account? <a href="#" class="signup-link">Sign up</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right Side - Hero Section -->
+                <div class="col-lg-6 login-hero-section">
+                    <div class="hero-content">
+                        <div class="hero-card">
+                            <div class="hero-card-header">
+                                <div class="hero-logo">F</div>
+                                <h3>Directors Portal</h3>
+                            </div>
+                            <div class="hero-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>Streamlined Onboarding</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>Advanced Tools</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check"></i>
+                                    <span>Expert Support</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="hero-text">
+                            <h2>Build Your Business. Backed by Flint.</h2>
+                            <p>Join the mortgage brokers that match your ambitions. Our comprehensive platform provides everything you need to succeed.</p>
+                        </div>
+
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <h4>Advanced Technology</h4>
+                                <p>Cutting-edge tools and integrations</p>
+                            </div>
+                            <div class="stat-item">
+                                <h4>Expert Support</h4>
+                                <p>Dedicated team to help you grow</p>
+                            </div>
+                            <div class="stat-item">
+                                <h4>Proven Results</h4>
+                                <p>Track record of success</p>
+                            </div>
+                            <div class="stat-item">
+                                <h4>Flexible Growth</h4>
+                                <p>Scale at your own pace</p>
+                            </div>
+                        </div>
+
+                        <div class="hero-quote">
+                            <p>"The mortgage brokers that match your ambitions"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('passwordToggleIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            // Simple validation
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (email && password) {
+                // Simulate login success
+                showLoginSuccess();
+                
+                // Redirect to main portal after delay
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            }
+        }
+
+        function showLoginSuccess() {
+            // Create success notification
+            const notification = document.createElement('div');
+            notification.className = 'login-notification';
+            notification.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <span>Login successful! Redirecting...</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after animation
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        }
+    </script>
+
+    <style>
+        /* Login Page Specific Styles */
+        .login-container {
+            min-height: 100vh;
+            background: var(--color-background-white);
+        }
+
+        .login-form-container {
+            max-width: 400px;
+            width: 100%;
+            padding: 2rem;
+        }
+
+        .login-logo {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            border: 2px solid var(--color-primary-burgundy);
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .login-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-primary-burgundy);
+            margin: 0;
+        }
+
+        .welcome-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--color-primary-burgundy);
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-subtitle {
+            color: var(--color-text-secondary);
+            margin-bottom: 0;
+        }
+
+        .login-form {
+            width: 100%;
+        }
+
+        .password-input-container {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .password-toggle:hover {
+            color: var(--color-primary-burgundy);
+        }
+
+        .forgot-password-link {
+            color: var(--color-primary-burgundy);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .forgot-password-link:hover {
+            color: var(--color-primary-hover);
+            text-decoration: underline;
+        }
+
+        .signup-text {
+            color: var(--color-text-secondary);
+            margin: 0;
+        }
+
+        .signup-link {
+            color: var(--color-primary-burgundy);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link:hover {
+            color: var(--color-primary-hover);
+            text-decoration: underline;
+        }
+
+        /* Hero Section */
+        .login-hero-section {
+            background: linear-gradient(135deg, var(--color-primary-burgundy) 0%, rgba(var(--color-primary-burgundy-rgb), 0.8) 50%, var(--color-accent-coral) 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .login-hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(var(--color-accent-coral-rgb), 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(var(--color-accent-cornflower-rgb), 0.08) 0%, transparent 50%);
+            opacity: 0.6;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 500px;
+            color: var(--color-background-white);
+        }
+
+        .hero-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .hero-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-logo {
+            width: 48px;
+            height: 48px;
+            background: var(--color-accent-coral);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary-burgundy);
+        }
+
+        .hero-card h3 {
+            color: var(--color-background-white);
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .hero-features {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--color-background-white);
+        }
+
+        .feature-item i {
+            color: var(--color-accent-mint) !important;
+            font-size: 1rem;
+        }
+
+        .hero-text {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .hero-text h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-background-white);
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-background-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+
+        .hero-quote {
+            text-align: center;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+
+        .hero-quote p {
+            margin: 0;
+        }
+
+        /* Login Notification */
+        .login-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--color-accent-mint);
+            color: var(--color-primary-burgundy);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 9999;
+            animation: slideInRight 0.3s ease;
+        }
+
+        .login-notification i {
+            color: var(--color-primary-burgundy) !important;
+            font-size: 1.2rem;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 991px) {
+            .login-hero-section {
+                display: none;
+            }
+            
+            .login-form-container {
+                max-width: 500px;
+                padding: 3rem 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .login-form-container {
+                padding: 2rem 1rem;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
+</body>
+</html>
