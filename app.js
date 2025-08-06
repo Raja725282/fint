@@ -22,6 +22,16 @@ const appData = {
       "title": "Innovation",
       "description": "Leveraging cutting-edge technology and processes",
       "icon": "fa-lightbulb"
+    },
+    {
+      "title": "Community",
+      "description": "Supporting and growing together as one Flint family",
+      "icon": "fa-users-cog"
+    },
+    {
+      "title": "Growth",
+      "description": "Continuous learning and development for lasting success",
+      "icon": "fa-chart-line-up"
     }
   ],
   "tech_stack": [
@@ -260,14 +270,17 @@ function generateOnboardingSteps() {
     
     container.empty();
     
-    appData.onboarding_steps.forEach(step => {
+    // Display only first 6 steps in the main grid
+    const mainSteps = appData.onboarding_steps.slice(0, 6);
+    
+    mainSteps.forEach(step => {
         const isCompleted = completedSteps.has(step.step);
         const statusBadge = isCompleted ? 
             '<span class="status status--success">Completed</span>' :
             '<span class="status status--info">Not Started</span>';
         
         const stepCard = `
-            <div class="col-lg-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="step-card" onclick="navigateToSection('step${step.step}')">
                     <div class="step-card-header">
                         <div class="step-number">${step.step}</div>
@@ -345,9 +358,9 @@ function generateValuesGrid() {
     
     container.empty();
     
-    appData.flint_values.forEach(value => {
+    appData.flint_values.forEach((value, index) => {
         const valueCard = `
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="value-card">
                     <div class="value-icon">
                         <i class="fas ${value.icon}"></i>
@@ -591,5 +604,33 @@ $('<style>')
         }
     `)
     .appendTo('head');
+
+// Profile and Settings Functions
+function showProfileSettings() {
+    alert('Profile settings will be implemented here. This would typically open a profile management modal or page.');
+}
+
+function showSettings() {
+    alert('Settings panel will be implemented here. This would typically open a settings modal with preferences, notifications, etc.');
+}
+
+function showHelp() {
+    // Show FAQ modal or help documentation
+    showFaqModal();
+}
+
+function logout() {
+    // Clear any stored user data
+    localStorage.removeItem('userProgress');
+    localStorage.removeItem('completedSteps');
+    
+    // Show confirmation
+    if (confirm('Are you sure you want to sign out?')) {
+        // Redirect to login page
+        window.location.href = 'login.html';
+    }
+    
+    return false; // Prevent default link behavior
+}
 
 console.log('Flint Directors Portal JavaScript loaded successfully');

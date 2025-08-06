@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flint Directors Onboarding Portal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Font Awesome - Multiple sources for better compatibility -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="flint-style.css">
@@ -16,49 +18,43 @@
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="javascript:void(0)" onclick="navigateToSection('landing')">
-                <img src="image/icon.PNG" alt="Flint Logo" class="header-icon">
+                <img src="icon.PNG" alt="Flint Logo" class="header-logo">
                 <div class="brand-text">
                     <span class="brand-title">Flint Directors Portal</span>
                     <span class="brand-subtitle">Your Onboarding Journey</span>
                 </div>
             </a>
 
-            <div class="navbar-nav ms-auto d-flex flex-row align-items-center">
+            <!-- Right Side Header Elements -->
+            <div class="header-right d-flex align-items-center gap-3">
                 <!-- Progress Indicator -->
-                <div class="progress-indicator d-none d-lg-flex me-3">
+                <div class="progress-indicator d-flex">
                     <span class="progress-text">Welcome back, John</span>
                     <span class="progress-steps">2 of 5 steps completed</span>
                 </div>
                 
                 <!-- User Profile -->
                 <div class="user-profile-dropdown dropdown">
-                    <button class="user-profile-btn" type="button" data-bs-toggle="dropdown">
-                        <div class="user-avatar">JD</div>
+                    <button class="user-profile-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="user-avatar">
+                            <img src="https://ui-avatars.com/api/?name=John+Doe&background=FFAF9C&color=4D0032&bold=true&size=40" alt="John Doe" class="profile-image">
+                        </div>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                        <li class="dropdown-header">
+                            <div class="user-info">
+                                <strong>John Doe</strong>
+                                <small class="text-muted">Director</small>
+                            </div>
+                        </li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="login.html"><i class="fas fa-sign-out-alt me-2"></i>Sign Out</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="showProfileSettings()"><i class="fas fa-user me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="showSettings()"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="showHelp()"><i class="fas fa-question-circle me-2"></i>Help & Support</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="login.html" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Sign Out</a></li>
                     </ul>
                 </div>
-                
-                <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="navigateToSection('landing')">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="navigateToSection('step1')">Step 1</a></li>
-                    <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="navigateToSection('step2')">Step 2</a></li>
-                    <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="navigateToSection('step3')">Step 3</a></li>
-                    <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="navigateToSection('step4')">Step 4</a></li>
-                    <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="navigateToSection('step5')">Step 5</a></li>
-                    <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="navigateToSection('step6')">Step 6</a></li>
-                    <li class="nav-item"><a class="nav-link" href="javascript:void(0)" onclick="navigateToSection('step7')">Step 7</a></li>
-                </ul>
             </div>
         </div>
     </nav>
@@ -89,12 +85,15 @@
                                 <div class="welcome-video">
                                     <div class="video-container" onclick="showVideoModal()">
                                         <div class="video-thumbnail">
+                                            <!-- Video thumbnail background -->
+                                            <div class="thumbnail-bg"></div>
                                             <div class="play-button">
                                                 <i class="fas fa-play"></i>
                                             </div>
                                             <div class="video-info">
                                                 <h4>Welcome from Christian</h4>
                                                 <p>Click to play introduction</p>
+                                                <span class="video-duration">2:45</span>
                                             </div>
                                         </div>
                                     </div>
@@ -109,10 +108,14 @@
             <div class="container my-5">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="section-title">Your Progress</h2>
+                        <div class="progress-section-header">
+                            <h2 class="section-title">Your Progress</h2>
+                            <p class="section-description">Track your onboarding journey and see what's coming next</p>
+                        </div>
                         <div class="progress-overview-card">
                             <div class="progress-header">
                                 <span class="progress-percentage">40% Complete</span>
+                                <span class="progress-steps-count">Step 2 of 5</span>
                             </div>
                             <div class="progress-bar-container">
                                 <div class="progress-bar-fill" style="width: 40%"></div>
@@ -250,34 +253,117 @@
                 </div>
             </div>
 
-            <!-- Help Section -->
+            <!-- Enhanced Help Section -->
             <div class="container my-5">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="help-section">
-                            <h3 class="help-title">Need Help?</h3>
-                            <p class="help-description">Our support team is here to help you succeed.</p>
-                            <button class="btn btn--primary" onclick="showFaqModal()">
-                                Contact Support
-                            </button>
+                <div class="enhanced-help-section">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8">
+                            <div class="help-content">
+                                <div class="help-icon">
+                                    <i class="fas fa-life-ring"></i>
+                                </div>
+                                <div class="help-text">
+                                    <h3 class="help-title">Need Help?</h3>
+                                    <p class="help-description">Our dedicated support team is here 24/7 to help you succeed. Get instant answers or schedule a one-on-one consultation.</p>
+                                    <div class="help-features">
+                                        <div class="feature-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span>24/7 Support</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <i class="fas fa-user-friends"></i>
+                                            <span>Personal Mentor</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <i class="fas fa-video"></i>
+                                            <span>Live Chat</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="help-actions">
+                                <button class="btn btn--primary btn--lg mb-3" onclick="showFaqModal()">
+                                    <i class="fas fa-headset me-2"></i>Contact Support
+                                </button>
+                                <button class="btn btn--outline btn--lg mb-3" onclick="showFaqModal()">
+                                    <i class="fas fa-question-circle me-2"></i>View FAQ
+                                </button>
+                                <button class="btn btn--secondary btn--lg" onclick="showVideoModal()">
+                                    <i class="fas fa-calendar-alt me-2"></i>Schedule Call
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Testimonials Section -->
-            <div class="container my-5">
-                <h2 class="section-title text-center mb-5">What Our Directors Say</h2>
-                <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner" id="testimonialsContainer">
-                        <!-- Testimonials will be generated by JavaScript -->
+            <!-- Enhanced Testimonials Section -->
+            <div class="enhanced-testimonials-section">
+                <div class="container">
+                    <div class="testimonials-header text-center mb-5">
+                        <div class="testimonials-badge">
+                            <i class="fas fa-quote-left"></i>
+                            <span>Success Stories</span>
+                        </div>
+                        <h2 class="section-title">What Our Directors Say</h2>
+                        <p class="section-description">Real stories from Flint Directors who've built thriving businesses</p>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </button>
+                    
+                    <div class="testimonials-wrapper">
+                        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active"></button>
+                                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"></button>
+                                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2"></button>
+                            </div>
+                            
+                            <div class="carousel-inner" id="testimonialsContainer">
+                                <!-- Testimonials will be generated by JavaScript -->
+                            </div>
+                            
+                            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                                <div class="control-icon">
+                                    <i class="fas fa-chevron-left"></i>
+                                </div>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                                <div class="control-icon">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonials-stats">
+                        <div class="row text-center">
+                            <div class="col-md-3">
+                                <div class="stat-item">
+                                    <h3>500+</h3>
+                                    <p>Directors</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-item">
+                                    <h3>$2.5B+</h3>
+                                    <p>Loans Settled</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-item">
+                                    <h3>95%</h3>
+                                    <p>Satisfaction Rate</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-item">
+                                    <h3>24/7</h3>
+                                    <p>Support</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -777,6 +863,66 @@
     <button class="floating-btn next-step-btn d-lg-none" id="mobileNextBtn">
         Next Step <i class="fas fa-arrow-right ms-1"></i>
     </button>
+
+    <!-- Footer -->
+    <footer class="flint-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-brand">
+                        <img src="data:image/png;base64,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" alt="Flint Logo" class="footer-logo">
+                        <h5>Flint Directors Portal</h5>
+                        <p>Build your business. Backed by Flint.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="footer-title">Quick Links</h6>
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="navigateToSection('landing')">Dashboard</a></li>
+                        <li><a href="javascript:void(0)" onclick="navigateToSection('step1')">Getting Started</a></li>
+                        <li><a href="javascript:void(0)" onclick="showFaqModal()">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="footer-title">Resources</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Training Videos</a></li>
+                        <li><a href="#">Templates</a></li>
+                        <li><a href="#">Best Practices</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="footer-title">Contact</h6>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-envelope"></i>support@flint.com.au</p>
+                        <p><i class="fas fa-phone"></i>1300 354 686</p>
+                        <p><i class="fas fa-map-marker-alt"></i>Sydney, Australia</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="footer-copyright">&copy; 2025 Flint Group. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="footer-legal">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Modals -->
     <!-- Video Modal -->
