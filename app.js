@@ -1,7 +1,20 @@
 // Flint Directors Onboarding Portal JavaScript
 
-// Application Data
-const appData = {
+// Data Configuration - API endpoints for pulling data
+const apiConfig = {
+  baseUrl: '/api', // Can be configured to point to actual API server
+  endpoints: {
+    flintValues: '/flint-values',
+    techStack: '/tech-stack', 
+    onboardingSteps: '/onboarding-steps',
+    testimonials: '/testimonials',
+    resources: '/resources'
+  },
+  fallbackToLocal: true // Use local data if API fails
+};
+
+// Fallback/Default Application Data
+const defaultAppData = {
   "flint_values": [
     {
       "title": "Trust",
@@ -143,13 +156,154 @@ const appData = {
   ]
 };
 
+// Dynamic App Data - will be populated by pulling from API or fallback to default
+let appData = {};
+
+// Data Pulling Functions
+async function pullDataFromAPI(endpoint) {
+  try {
+    const response = await fetch(apiConfig.baseUrl + endpoint);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.warn(`Failed to pull data from ${endpoint}:`, error.message);
+    return null;
+  }
+}
+
+async function pullAllData() {
+  console.log('Pulling data from external sources...');
+  
+  const pullPromises = Object.entries(apiConfig.endpoints).map(async ([key, endpoint]) => {
+    const data = await pullDataFromAPI(endpoint);
+    return { key, data };
+  });
+  
+  const results = await Promise.all(pullPromises);
+  const pulledData = {};
+  
+  results.forEach(({ key, data }) => {
+    if (data) {
+      // Map API keys to appData structure
+      const mappedKey = mapApiKeyToAppData(key);
+      pulledData[mappedKey] = data;
+      console.log(`✓ Successfully pulled ${mappedKey} data from API`);
+    }
+  });
+  
+  return pulledData;
+}
+
+function mapApiKeyToAppData(apiKey) {
+  const mapping = {
+    'flintValues': 'flint_values',
+    'techStack': 'tech_stack',
+    'onboardingSteps': 'onboarding_steps',
+    'testimonials': 'testimonials',
+    'resources': 'resources'
+  };
+  return mapping[apiKey] || apiKey;
+}
+
+async function initializeAppData() {
+  console.log('Initializing application data...');
+  
+  // Try to pull data from API first
+  const pulledData = await pullAllData();
+  
+  // Merge pulled data with default data, preferring API data when available
+  appData = { ...defaultAppData };
+  
+  Object.keys(pulledData).forEach(key => {
+    if (pulledData[key] && pulledData[key].length > 0) {
+      appData[key] = pulledData[key];
+      console.log(`Using API data for ${key}`);
+    } else {
+      console.log(`Using fallback data for ${key}`);
+    }
+  });
+  
+  // If no API data was retrieved and fallbackToLocal is false, show warning
+  if (Object.keys(pulledData).length === 0 && !apiConfig.fallbackToLocal) {
+    console.warn('No API data available and fallback disabled');
+    showDataPullWarning();
+  }
+  
+  console.log('Application data initialized:', appData);
+  return appData;
+}
+
+function showDataPullWarning() {
+  const warningHtml = `
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <i class="fas fa-exclamation-triangle me-2"></i>
+      <strong>Data Pull Warning:</strong> Unable to retrieve latest data from server. 
+      Using cached data. Some information may not be current.
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  `;
+  $('.container').first().prepend(warningHtml);
+}
+
+// Data refresh functionality
+async function refreshData() {
+  console.log('Refreshing data...');
+  showRefreshIndicator();
+  
+  try {
+    await initializeAppData();
+    // Re-render dynamic content with new data
+    generateDynamicContent();
+    showNotification('Data refreshed successfully!', 'success');
+  } catch (error) {
+    console.error('Failed to refresh data:', error);
+    showNotification('Failed to refresh data', 'error');
+  } finally {
+    hideRefreshIndicator();
+  }
+}
+
+function showRefreshIndicator() {
+  const indicator = `
+    <div id="refreshIndicator" class="position-fixed top-50 start-50 translate-middle">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Refreshing data...</span>
+      </div>
+    </div>
+  `;
+  $('body').append(indicator);
+}
+
+function hideRefreshIndicator() {
+  $('#refreshIndicator').remove();
+}
+
+function showNotification(message, type = 'info') {
+  const notification = `
+    <div class="notification notification--${type}">
+      <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+      <span>${message}</span>
+    </div>
+  `;
+  $('body').append(notification);
+  
+  setTimeout(() => {
+    $('.notification').fadeOut(() => $('.notification').remove());
+  }, 3000);
+}
+
 // Global Variables
 let currentSection = 'landing';
 let completedSteps = new Set();
 
 // Initialize when DOM is ready
-$(document).ready(function() {
+$(document).ready(async function() {
     console.log('Initializing Flint Directors Portal...');
+    
+    // Initialize application data by pulling from API or using fallback
+    await initializeAppData();
     
     // Load saved progress
     loadProgress();

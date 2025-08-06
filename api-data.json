@@ -1,0 +1,61 @@
+{
+  "flint_values": [
+    {
+      "title": "Trust",
+      "description": "Building lasting relationships through transparency and reliability",
+      "icon": "fa-handshake"
+    },
+    {
+      "title": "Integrity", 
+      "description": "Maintaining the highest ethical standards in all our dealings",
+      "icon": "fa-shield-alt"
+    },
+    {
+      "title": "Excellence",
+      "description": "Delivering exceptional service and outcomes for every client",
+      "icon": "fa-star"
+    },
+    {
+      "title": "Innovation",
+      "description": "Leveraging cutting-edge technology and processes",
+      "icon": "fa-lightbulb"
+    },
+    {
+      "title": "Collaboration",
+      "description": "Working together to achieve exceptional results (API pulled data)",
+      "icon": "fa-users"
+    }
+  ],
+  "tech_stack": [
+    {
+      "name": "HubSpot",
+      "description": "CRM and Marketing Automation",
+      "icon": "fa-chart-line"
+    },
+    {
+      "name": "BrokerEngine",
+      "description": "Loan Origination Platform", 
+      "icon": "fa-cogs"
+    },
+    {
+      "name": "AOL",
+      "description": "Application Processing System",
+      "icon": "fa-file-alt"
+    },
+    {
+      "name": "FlintEngine",
+      "description": "Back Office Support Team",
+      "icon": "fa-users"
+    },
+    {
+      "name": "FlintMedia",
+      "description": "Marketing and Content Platform",
+      "icon": "fa-bullhorn"
+    },
+    {
+      "name": "FlintAPI",
+      "description": "Data Integration Platform (API pulled data)",
+      "icon": "fa-code"
+    }
+  ]
+}
